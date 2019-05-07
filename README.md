@@ -1,5 +1,5 @@
-Debian 7 and 8 Deployer
-===================
+Debian 7, 8 and 9 Deployer
+==========================
 
 Installation
 ------------
@@ -7,7 +7,7 @@ Installation
 ```
 apt-get update
 apt-get install git screen lsb-release -y
-git clone https://github.com/d1gi/debian-deployer.git
+git clone https://github.com/Smart-Core/debian-deployer.git
 cd debian-deployer
 ./install.sh
 ```
@@ -15,7 +15,7 @@ cd debian-deployer
 or in one line command
 
 ```
-apt-get update && apt-get install git screen lsb-release -y && git clone https://github.com/d1gi/debian-deployer.git && cd debian-deployer && ./install.sh
+apt-get update && apt-get install git screen lsb-release -y && git clone https://github.com/Smart-Core/debian-deployer.git && cd debian-deployer && ./install.sh
 ```
 
 Alternative via zip
@@ -23,7 +23,7 @@ Alternative via zip
 ```
 apt-get update && apt-get upgrade
 apt-get install zip screen lsb-release -y
-wget https://github.com/d1gi/debian-deployer/archive/master.zip -O debian-deployer.zip
+wget https://github.com/Smart-Core/debian-deployer/archive/master.zip -O debian-deployer.zip
 unzip debian-deployer.zip
 cd debian-deployer-master
 ./install.sh
@@ -133,6 +133,8 @@ Append the following line:
 @todo
 -----
 
+ *  Debian 9
+ *  PHP 7.2
  *  Backup resolf.conf default config
  *  Install latest phpmyadmin via http://www.phpmyadmin.net/home_page/version.json
  *  IonCube Loader (https://www.digitalocean.com/community/tutorials/how-to-install-ioncube-loader)
