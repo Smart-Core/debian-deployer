@@ -286,8 +286,6 @@ then
     update-rc.d php7.3-fpm defaults
 fi
 
-mkdir /var/www
-
 mkdir /var/lib/php
 mkdir /var/lib/php/sessions
 chmod 0777 /var/lib/php/sessions
@@ -341,6 +339,7 @@ else
 fi
 
 apt-get autoremove -y
+mkdir /var/www
 
 # Ruby
     ## https://www.digitalocean.com/community/tutorials/how-to-install-ruby-on-rails-on-an-debian-7-0-wheezy-vps-using-rvm
