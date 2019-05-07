@@ -286,6 +286,8 @@ then
     update-rc.d php7.3-fpm defaults
 fi
 
+mkdir /var/www
+
 mkdir /var/lib/php
 mkdir /var/lib/php/sessions
 chmod 0777 /var/lib/php/sessions
