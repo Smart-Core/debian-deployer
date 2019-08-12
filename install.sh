@@ -8,28 +8,30 @@ DEBIAN_VERSION=$(cat /etc/debian_version | head -c 1)
 
 tput sgr0
 
-read -p "Select PHP version (71/73), default is 73:" PHP_VERSION
+#read -p "Select PHP version (71/73), default is 73:" PHP_VERSION
 
-case $PHP_VERSION in
-    71) echo -e "${GREEN} Enable PHP v7.1 ${NORMAL}"
-       ;;
-    73) echo -e "${GREEN} Enable PHP v7.3 ${NORMAL}"
-       ;;
-    *)
-       echo -e "${YELLOW} Wrong PHP version selected, using v 7.3 by default${NORMAL}"
-       PHP_VERSION="73"
-       ;;
-esac
+PHP_VERSION="73"
+
+#case $PHP_VERSION in
+#    71) echo -e "${GREEN} Enable PHP v7.1 ${NORMAL}"
+#        ;;
+#    73) echo -e "${GREEN} Enable PHP v7.3 ${NORMAL}"
+#        ;;
+#    *)
+#        echo -e "${YELLOW} Wrong PHP version selected, using v 7.3 by default${NORMAL}"
+#        PHP_VERSION="73"
+#        ;;
+#esac
 
 read -p "Install Apache Web Server (N/y)" INSTALL_APACHE
 
 case $INSTALL_APACHE in
-    y|Y)echo -e "${GREEN} Enable Apache ${NORMAL}"
-        INSTALL_APACHE="1"
-        ;;
-    *)  echo -e "${YELLOW} Ignore Apache ${NORMAL}"
-        INSTALL_APACHE="0"
-        ;;
+    y|Y) echo -e "${GREEN} Enable Apache ${NORMAL}"
+         INSTALL_APACHE="1"
+         ;;
+    *)   echo -e "${YELLOW} Ignore Apache ${NORMAL}"
+         INSTALL_APACHE="0"
+         ;;
 esac
 
 read -p "Install PostrgeSQL (N/y)" INSTALL_POSTRGESQL
@@ -52,32 +54,7 @@ dpkg-reconfigure tzdata
 apt-get upgrade -y
 
 # @todo http://blog.programster.org/debian-8-install-php-7-1/
-if (( $DEBIAN_VERSION == 7 ))
-then
-    echo "Wheezy installing..."
-
-    # Dotdeb
-    wget --quiet -O - http://www.dotdeb.org/dotdeb.gpg | apt-key add -
-    printf "deb http://packages.dotdeb.org wheezy all\ndeb-src http://packages.dotdeb.org wheezy all\ndeb http://packages.dotdeb.org wheezy-php56 all\ndeb-src http://packages.dotdeb.org wheezy-php56 all\ndeb http://mirror.nl.leaseweb.net/dotdeb/ wheezy-php56 all\ndeb-src http://mirror.nl.leaseweb.net/dotdeb/ wheezy-php56 all" > /etc/apt/sources.list.d/dotdeb.list
-
-    # Varnish
-    wget --quiet -O - https://repo.varnish-cache.org/debian/GPG-key.txt | apt-key add -
-    echo "deb https://repo.varnish-cache.org/debian/ wheezy varnish-3.0" > /etc/apt/sources.list.d/varnish-cache.list
-
-    # PostgreSQL
-    wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
-    apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 7FCC7D46ACCC4CF8
-    echo "deb http://apt.postgresql.org/pub/repos/apt/ wheezy-pgdg main" > /etc/apt/sources.list.d/postgresql.list
-
-    # Maria DB
-    apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xcbcb082a1bb943db
-    printf "deb http://mirror.mephi.ru/mariadb/repo/10.0/debian wheezy main\ndeb-src http://mirror.mephi.ru/mariadb/repo/10.0/debian wheezy main" > /etc/apt/sources.list.d/mariadb.list
-
-    # Subversion 1.9
-    wget -q http://opensource.wandisco.com/wandisco-debian.gpg -O- | apt-key add -
-    echo "deb http://staging.opensource.wandisco.com/debian wheezy svn19" > /etc/apt/sources.list.d/subversion.list
-
-elif (( $DEBIAN_VERSION == 8 ))
+if (( $DEBIAN_VERSION == 8 ))
 then
     echo -e "${YELLOW} Jessie installing... ${NORMAL}"
 
@@ -127,6 +104,46 @@ then
 elif (( $DEBIAN_VERSION == 9 ))
 then
     echo -e "${YELLOW} Debian 9 'Stretch' installing... ${NORMAL}"
+
+    # Ondrej Sury php 7.3
+    wget --quiet -O - https://packages.sury.org/php/apt.gpg | apt-key add -
+    printf "deb https://packages.sury.org/php/ stretch main" > /etc/apt/sources.list.d/php7.3.list
+
+    # Dotdeb
+    wget --quiet -O - http://www.dotdeb.org/dotdeb.gpg | apt-key add -
+    printf "deb http://packages.dotdeb.org stretch all\ndeb-src http://packages.dotdeb.org stretch all\ndeb http://mirror.nl.leaseweb.net/dotdeb/ stretch all\ndeb-src http://mirror.nl.leaseweb.net/dotdeb/ stretch all" > /etc/apt/sources.list.d/dotdeb.list
+
+    # Nginx
+    wget --quiet -O - http://nginx.org/keys/nginx_signing.key | apt-key add -
+    printf "deb http://nginx.org/packages/mainline/debian/ stretch nginx\ndeb-src http://nginx.org/packages/mainline/debian/ stretch nginx" > /etc/apt/sources.list.d/nginx.list
+
+    # Java
+#    add-apt-repository ppa:webupd8team/java -y
+    apt-key adv --keyserver keyserver.ubuntu.com --recv-keys EA8CACC073C3DB2A
+    apt-key adv --keyserver keyserver.ubuntu.com --recv-keys C2518248EEA14886
+
+    # Varnish
+    wget --quiet https://packagecloud.io/varnishcache/varnish5/gpgkey -O - | apt-key add -
+    echo "deb https://packagecloud.io/varnishcache/varnish5/debian/ stretch main\ndeb-src https://packagecloud.io/varnishcache/varnish5/debian/ stretch main" > /etc/apt/sources.list.d/varnishcache5.list
+
+    # PostgreSQL
+    wget -q https://www.postgresql.org/media/keys/ACCC4CF8.asc -O - | apt-key add -
+    echo "deb http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main" > /etc/apt/sources.list.d/postgresql.list
+
+    # Maria DB
+    apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xcbcb082a1bb943db
+#    printf "deb http://mirror.mephi.ru/mariadb/repo/10.0/debian jessie main\ndeb-src http://mirror.mephi.ru/mariadb/repo/10.0/debian jessie main" > /etc/apt/sources.list.d/mariadb.list
+
+    # MongoDB
+    wget -q https://www.mongodb.org/static/pgp/server-4.0.asc -O - | apt-key add -
+    echo "deb http://repo.mongodb.org/apt/debian stretch/mongodb-org/4.0 main" > /etc/apt/sources.list.d/mongodb.list
+
+    # Subversion 1.12
+#    wget -q http://opensource.wandisco.com/wandisco-debian.gpg -O- | apt-key add -
+#    echo "deb http://staging.opensource.wandisco.com/debian stretch svn112" > /etc/apt/sources.list.d/subversion.list
+elif (( $DEBIAN_VERSION == 10 ))
+then
+    echo -e "${YELLOW} Debian 10 'Buster' installing... ${NORMAL}"
 
     # Ondrej Sury php 7.3
     wget --quiet -O - https://packages.sury.org/php/apt.gpg | apt-key add -
