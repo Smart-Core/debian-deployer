@@ -23,7 +23,7 @@ if (file_exists('/var/www/' . $dir)) {
 $conf = '
 server {
     server_name '.$domain.';
-    root /var/www/'.$dir.'/web;
+    root /var/www/'.$dir.'/public;
     error_log /var/log/nginx/'.$dir.'_errors.log;
     access_log /var/log/nginx/'.$dir.'_access.log;
 
@@ -57,8 +57,8 @@ file_put_contents('/etc/nginx/sites-enabled/'.$dir.'.conf', $conf);
 
 mkdir("/var/www/{$dir}");
 mkdir("/var/www/{$dir}/web");
-file_put_contents("/var/www/{$dir}/web/index.php", $domain . ' is under construction...');
-file_put_contents("/var/www/{$dir}/web/robots.txt", $robotsTxt);
-system("chown -hR www-data:www-data /var/www/{$dir}/web");
+file_put_contents("/var/www/{$dir}/public/index.php", $domain . ' is under construction...');
+file_put_contents("/var/www/{$dir}/public/robots.txt", $robotsTxt);
+system("chown -hR www-data:www-data /var/www/{$dir}/public");
 
 system('/etc/init.d/nginx reload');

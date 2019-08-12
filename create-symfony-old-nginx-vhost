@@ -2,8 +2,8 @@
 <?php
 
 if (!isset($argv[1])) {
-    echo "You need to set domain name, for example: create-nginx-vhost mysite.ru\n\n";
-    echo "Or with specific directory in /var/www/: create-nginx-vhost mysite.ru my_site_dir\n";
+    echo "You need to set domain name, for example: create-symfony-old-vhost mysite.ru\n\n";
+    echo "Or with specific directory in /var/www/: create-symfony-old-vhost mysite.ru my_site_dir\n";
     exit(1);
 }
 

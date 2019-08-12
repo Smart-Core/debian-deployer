@@ -18,9 +18,9 @@ $conf = "
     ServerAdmin webmaster@{$domain}
     ServerName {$domain}
 
-    DocumentRoot /var/www/{$domain}/web
+    DocumentRoot /var/www/{$domain}/public
 
-    <Directory /var/www/{$domain}/web/>
+    <Directory /var/www/{$domain}/public/>
         Options Indexes FollowSymLinks MultiViews
         AllowOverride All
         Order allow,deny
@@ -56,11 +56,11 @@ Disallow: /admin/
 file_put_contents('/etc/apache2/sites-enabled/' . $domain, $conf);
 
 mkdir("/var/www/{$domain}");
-mkdir("/var/www/{$domain}/web");
+mkdir("/var/www/{$domain}/public");
 file_put_contents("/var/www/{$domain}/web/index.php", $domain . ' is under construction...');
 file_put_contents("/var/www/{$domain}/web/.htaccess", $htaccess);
 file_put_contents("/var/www/{$domain}/web/robots.txt", $robotsTxt);
-system("chown -hR www-data:www-data /var/www/{$domain}/web");
+system("chown -hR www-data:www-data /var/www/{$domain}/public");
 
 //system('service apache2 reload');
 system('/etc/init.d/apache2 reload');
