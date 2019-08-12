@@ -5,6 +5,7 @@ RED='\033[0;31m'     #  ${RED}
 GREEN='\033[0;32m'   #  ${GREEN}
 YELLOW='\033[0;33m'  #  ${YELLOW}
 DEBIAN_VERSION=$(cat /etc/debian_version | head -c 1)
+RELEASE=$(lsb_release -cs)
 
 tput sgr0
 
@@ -46,7 +47,7 @@ case $INSTALL_POSTRGESQL in
 esac
 
 apt-get install apt-utils -y
-apt-get install apt-transport-https dialog dirmngr apt-utils locales locales-all debian-archive-keyring -y
+apt-get install apt-transport-https dialog dirmngr apt-utils locales locales-all debian-archive-keyring curl -y
 
 dpkg-reconfigure locales
 dpkg-reconfigure tzdata
@@ -141,21 +142,22 @@ then
     # Subversion 1.12
 #    wget -q http://opensource.wandisco.com/wandisco-debian.gpg -O- | apt-key add -
 #    echo "deb http://staging.opensource.wandisco.com/debian stretch svn112" > /etc/apt/sources.list.d/subversion.list
+
 elif (( $DEBIAN_VERSION == 10 ))
 then
     echo -e "${YELLOW} Debian 10 'Buster' installing... ${NORMAL}"
 
     # Ondrej Sury php 7.3
-    wget --quiet -O - https://packages.sury.org/php/apt.gpg | apt-key add -
-    printf "deb https://packages.sury.org/php/ stretch main" > /etc/apt/sources.list.d/php7.3.list
+#    wget --quiet -O - https://packages.sury.org/php/apt.gpg | apt-key add -
+#    printf "deb https://packages.sury.org/php/ stretch main" > /etc/apt/sources.list.d/php7.3.list
 
     # Dotdeb
-    wget --quiet -O - http://www.dotdeb.org/dotdeb.gpg | apt-key add -
-    printf "deb http://packages.dotdeb.org stretch all\ndeb-src http://packages.dotdeb.org stretch all\ndeb http://mirror.nl.leaseweb.net/dotdeb/ stretch all\ndeb-src http://mirror.nl.leaseweb.net/dotdeb/ stretch all" > /etc/apt/sources.list.d/dotdeb.list
+#    wget --quiet -O - http://www.dotdeb.org/dotdeb.gpg | apt-key add -
+#    printf "deb http://packages.dotdeb.org stretch all\ndeb-src http://packages.dotdeb.org stretch all\ndeb http://mirror.nl.leaseweb.net/dotdeb/ stretch all\ndeb-src http://mirror.nl.leaseweb.net/dotdeb/ stretch all" > /etc/apt/sources.list.d/dotdeb.list
 
     # Nginx
     wget --quiet -O - http://nginx.org/keys/nginx_signing.key | apt-key add -
-    printf "deb http://nginx.org/packages/mainline/debian/ stretch nginx\ndeb-src http://nginx.org/packages/mainline/debian/ stretch nginx" > /etc/apt/sources.list.d/nginx.list
+    printf "deb http://nginx.org/packages/mainline/debian/ stretch nginx\ndeb-src http://nginx.org/packages/mainline/debian/ ${RELEASE} nginx" > /etc/apt/sources.list.d/nginx.list
 
     # Java
 #    add-apt-repository ppa:webupd8team/java -y
@@ -163,24 +165,28 @@ then
     apt-key adv --keyserver keyserver.ubuntu.com --recv-keys C2518248EEA14886
 
     # Varnish
-    wget --quiet https://packagecloud.io/varnishcache/varnish5/gpgkey -O - | apt-key add -
-    echo "deb https://packagecloud.io/varnishcache/varnish5/debian/ stretch main\ndeb-src https://packagecloud.io/varnishcache/varnish5/debian/ stretch main" > /etc/apt/sources.list.d/varnishcache5.list
+#    wget --quiet https://packagecloud.io/varnishcache/varnish60lts/gpgkey -O - | apt-key add -
+#    echo "deb https://packagecloud.io/varnishcache/varnish60lts/debian/ ${RELEASE} main\ndeb-src https://packagecloud.io/varnishcache/varnish60lts/debian/ ${RELEASE} main" > /etc/apt/sources.list.d/varnishcache5.list
 
     # PostgreSQL
     wget -q https://www.postgresql.org/media/keys/ACCC4CF8.asc -O - | apt-key add -
-    echo "deb http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main" > /etc/apt/sources.list.d/postgresql.list
+    echo "deb http://apt.postgresql.org/pub/repos/apt/ ${RELEASE}"-pgdg main > /etc/apt/sources.list.d/postgresql.list
 
     # Maria DB
-    apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xcbcb082a1bb943db
+#    apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xcbcb082a1bb943db
 #    printf "deb http://mirror.mephi.ru/mariadb/repo/10.0/debian jessie main\ndeb-src http://mirror.mephi.ru/mariadb/repo/10.0/debian jessie main" > /etc/apt/sources.list.d/mariadb.list
 
     # MongoDB
-    wget -q https://www.mongodb.org/static/pgp/server-4.0.asc -O - | apt-key add -
-    echo "deb http://repo.mongodb.org/apt/debian stretch/mongodb-org/4.0 main" > /etc/apt/sources.list.d/mongodb.list
+#    wget -q https://www.mongodb.org/static/pgp/server-4.0.asc -O - | apt-key add -
+#    echo "deb http://repo.mongodb.org/apt/debian stretch/mongodb-org/4.0 main" > /etc/apt/sources.list.d/mongodb.list
 
     # Subversion 1.12
 #    wget -q http://opensource.wandisco.com/wandisco-debian.gpg -O- | apt-key add -
 #    echo "deb http://staging.opensource.wandisco.com/debian stretch svn112" > /etc/apt/sources.list.d/subversion.list
+
+    # Yarn
+    curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+    echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
 
 else
     echo -e "${RED} BAD Debian version ${NORMAL}"
@@ -189,8 +195,8 @@ fi
 
 
 # elasticsearch
-wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
-echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" > /etc/apt/sources.list.d/elasticsearch.list
+#wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
+#echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" > /etc/apt/sources.list.d/elasticsearch.list
 
 # Apache Cassandra
 #apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 749D6EEC0353B12C
@@ -213,13 +219,13 @@ gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB8
 wget -qO- https://deb.nodesource.com/setup_12.x | bash -
 
 # Базовый софт
-apt-get install net-tools -y
-#apt-get install libmyodbc python-software-properties -y
-apt-get install colordiff mc htop gcc g++ make git curl rcconf p7zip-full zip dnsutils monit software-properties-common -y
+apt-get install net-tools gnupg -y
+#apt-get install libmyodbc python-software-properties monit -y
+apt-get install colordiff mc htop gcc g++ make git curl rcconf p7zip-full zip dnsutils software-properties-common -y
 apt-get install acl bash-completion fail2ban resolvconf subversion sudo ntp imagemagick p7zip tree -y
 apt-get install libedit-dev libevent-dev libcurl4-openssl-dev automake1.1 libncurses-dev libpcre3-dev pkg-config python-docutils -y
-apt-get install libodbc1 fcgiwrap libgd-tools snmp mailutils -y
-#apt-get install oracle-java8-installer -y
+apt-get install libodbc1 fcgiwrap libgd-tools snmp mailutils yarn -y
+#apt-get install oracle-java12-installer -y
 apt-get install default-jdk -y
 #apt-get install elasticsearch -y
 #apt-get install rabbitmq-server -y
@@ -229,6 +235,7 @@ apt-get install redis-server -y
 
 # @todo интерактивный выбор mysql
 apt-get install mariadb-server -y
+mysql_secure_installation
 #apt-get install mysql-server mysql-client -y
 
 if (( $INSTALL_POSTRGESQL == 1 ))
@@ -295,7 +302,7 @@ then
     ln -s /etc/php/7.3/php-cli.ini /etc/php/7.3/cli/conf.d/01-php-cli.ini
     ln -s /etc/php/7.3/php-fpm.ini /etc/php/7.3/fpm/conf.d/01-php-fpm.ini
 
-    a2enmod php7.3
+#    a2enmod php7.3
     #a2enmod proxy_fcgi setenvif
     #a2enconf php7.0-fpm
 

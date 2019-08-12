@@ -2,8 +2,8 @@
 <?php
 
 if (!isset($argv[1])) {
-    echo "You need to set domain name, for example: create-symfony-vhost mysite.ru\n\n";
-    echo "Or with specific directory in /var/www/: create-symfony-vhost mysite.ru my_site_dir\n";
+    echo "You need to set domain name, for example: create-nginx-vhost mysite.ru\n\n";
+    echo "Or with specific directory in /var/www/: create-nginx-vhost mysite.ru my_site_dir\n";
     exit(1);
 }
 
@@ -23,7 +23,7 @@ if (file_exists('/var/www/' . $dir)) {
 $conf = '
 server {
     server_name '.$domain.';
-    root /var/www/'.$dir.'/public;
+    root /var/www/'.$dir.'/web;
     error_log /var/log/nginx/'.$dir.'_errors.log;
     access_log /var/log/nginx/'.$dir.'_access.log;
 
@@ -34,14 +34,14 @@ server {
 
     location / {
         # try to serve file directly, fallback to app.php
-        try_files $uri /index.php$is_args$args;
+        try_files $uri /app.php$is_args$args;
     }
 
     location @rewriteapp {
-        rewrite ^(.*)$ /index.php/$1 last;
+        rewrite ^(.*)$ /app.php/$1 last;
     }
     
-    location ~ ^/index\.php(/|$) {
+    location ~ ^/app\.php(/|$) {
         include php_default;
         fastcgi_split_path_info ^(.+\.php)(/.*)$;
         include fastcgi_params;
@@ -100,8 +100,8 @@ file_put_contents('/etc/nginx/sites-enabled/'.$dir.'.conf', $conf);
 
 mkdir("/var/www/{$dir}");
 mkdir("/var/www/{$dir}/web");
-file_put_contents("/var/www/{$dir}/public/index.php", $domain . ' is under construction...');
-file_put_contents("/var/www/{$dir}/public/robots.txt", $robotsTxt);
+file_put_contents("/var/www/{$dir}/web/app.php", $domain . ' is under construction...');
+file_put_contents("/var/www/{$dir}/web/robots.txt", $robotsTxt);
 system("chown -hR www-data:www-data /var/www/{$dir}/web");
 
 system('/etc/init.d/nginx reload');
