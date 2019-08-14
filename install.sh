@@ -263,6 +263,7 @@ then
     cp -v create-symfony-old-nginx-vhost /usr/local/bin/create-symfony-old-nginx-vhost
     chmod 0755 /usr/local/bin/create-nginx-vhost
     chmod 0755 /usr/local/bin/create-symfony-nginx-vhost
+    chmod 0755 /usr/local/bin/create-symfony-old-nginx-vhost
 fi
 
 # Cache

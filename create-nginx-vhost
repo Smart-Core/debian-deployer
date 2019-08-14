@@ -56,7 +56,7 @@ Disallow: /admin/
 file_put_contents('/etc/nginx/sites-enabled/'.$dir.'.conf', $conf);
 
 mkdir("/var/www/{$dir}");
-mkdir("/var/www/{$dir}/web");
+mkdir("/var/www/{$dir}/public");
 file_put_contents("/var/www/{$dir}/public/index.php", $domain . ' is under construction...');
 file_put_contents("/var/www/{$dir}/public/robots.txt", $robotsTxt);
 system("chown -hR www-data:www-data /var/www/{$dir}/public");
