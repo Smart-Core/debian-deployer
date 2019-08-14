@@ -103,6 +103,7 @@ then
 
     # Docker
     curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -
+    apt-key fingerprint 0EBFCD88
     add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable"
 
     # Ondrej Sury php 7.3
@@ -110,8 +111,8 @@ then
     printf "deb https://packages.sury.org/php/ ${RELEASE} main" > /etc/apt/sources.list.d/php7.3.list
 
     # Dotdeb
-    wget --quiet -O - http://www.dotdeb.org/dotdeb.gpg | apt-key add -
-    printf "deb http://packages.dotdeb.org ${RELEASE} all\ndeb-src http://packages.dotdeb.org ${RELEASE} all\ndeb http://mirror.nl.leaseweb.net/dotdeb/ ${RELEASE} all\ndeb-src http://mirror.nl.leaseweb.net/dotdeb/ ${RELEASE} all" > /etc/apt/sources.list.d/dotdeb.list
+#    wget --quiet -O - http://www.dotdeb.org/dotdeb.gpg | apt-key add -
+#    printf "deb http://packages.dotdeb.org ${RELEASE} all\ndeb-src http://packages.dotdeb.org ${RELEASE} all\ndeb http://mirror.nl.leaseweb.net/dotdeb/ ${RELEASE} all\ndeb-src http://mirror.nl.leaseweb.net/dotdeb/ ${RELEASE} all" > /etc/apt/sources.list.d/dotdeb.list
 
     # Nginx
     wget --quiet -O - http://nginx.org/keys/nginx_signing.key | apt-key add -
@@ -151,7 +152,7 @@ then
     #wget -qO - http://www.rabbitmq.com/rabbitmq-signing-key-public.asc | apt-key add -
     #apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 6B73A36E6026DFCA
     curl -fsSL https://github.com/rabbitmq/signing-keys/releases/download/2.0/rabbitmq-release-signing-key.asc | apt-key add -
-    echo "deb https://dl.bintray.com/rabbitmq-erlang/debian ${RELEASE} erlang-21.x\ndeb https://dl.bintray.com/rabbitmq/debian ${RELEASE} main" > /etc/apt/sources.list.d/rabbitmq.list
+    echo "deb https://dl.bintray.com/rabbitmq-erlang/debian ${RELEASE} erlang-21.x \ndeb https://dl.bintray.com/rabbitmq/debian ${RELEASE} main" > /etc/apt/sources.list.d/rabbitmq.list
 
     # Ruby Version Manager
     gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
@@ -193,6 +194,7 @@ apt-get install rabbitmq-server -y --fix-missing
 apt-get install redis-server -y
 
 # @todo интерактивный выбор mysql
+# https://andreyex.ru/operacionnaya-sistema-debian/kak-ustanovit-mariadb-na-debian-10/
 apt-get install mariadb-server -y
 mysql_secure_installation
 #apt-get install mysql-server mysql-client -y
@@ -206,7 +208,7 @@ fi
 #apt-get install cassandra -y
 #apt-get install mongodb-org php5-mongo -y
 #apt-get install mongodb php5-mongo -y
-apt-get install docker-ce
+apt-get install docker-ce docker-ce-cli containerd.io
 apt-get install nodejs -y
 
 # Web servers
@@ -281,7 +283,7 @@ git clone https://github.com/KnpLabs/symfony2-autocomplete.git /usr/share/symfon
 
 # @todo pma и pga
 # http://www.phpmyadmin.net/home_page/version.json
-# wget http://files.phpmyadmin.net/phpMyAdmin/4.6.0/phpMyAdmin-4.6.0-all-languages.zip
+# wget http://files.phpmyadmin.net/phpMyAdmin/4.9.0.1/phpMyAdmin-4.9.0.1-all-languages.zip
 
 apt-get install postfix -y
 apt-get clean

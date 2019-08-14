@@ -102,6 +102,6 @@ mkdir("/var/www/{$dir}");
 mkdir("/var/www/{$dir}/public");
 file_put_contents("/var/www/{$dir}/public/index.php", $domain . ' is under construction...');
 file_put_contents("/var/www/{$dir}/public/robots.txt", $robotsTxt);
-system("chown -hR www-data:www-data /var/www/{$dir}/web");
+system("chown -hR www-data:www-data /var/www/{$dir}/public");
 
 system('/etc/init.d/nginx reload');
