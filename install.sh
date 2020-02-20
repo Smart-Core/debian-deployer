@@ -265,6 +265,11 @@ apt install -y php7.3 php7.3-fpm php7.3-cli php7.3-dev php7.3-common php7.3-apcu
 apt install -y php7.3-gmp php7.3-gd php7.3-bcmath php7.3-curl php7.3-intl php7.3-mbstring php7.3-bz2 php7.3-xml php7.3-zip
 apt install -y php7.3-snmp php7.3-xmlrpc php7.3-tidy php7.3-redis php7.3-imap php7.3-geoip php7.3-imagick php7.3-ssh2 php7.3-memcached
 
+# PHP 7.4
+#apt install -y php7.4 php7.4-fpm php7.4-cli php7.4-dev php7.4-common php7.4-apcu php7.4-mysql php7.4-pgsql php7.4-sqlite3
+#apt install -y php7.4-gmp php7.4-gd php7.4-bcmath php7.4-curl php7.4-intl php7.4-mbstring php7.4-bz2 php7.4-xml php7.4-zip
+#apt install -y php7.4-snmp php7.4-xmlrpc php7.4-tidy php7.4-redis php7.4-imap php7.4-geoip php7.4-imagick php7.4-ssh2 php7.4-memcached
+
 #apt-get install php php-cli php-dev php-fpm php-pear php-gd php-intl php-curl php-gmp php-bz2 php-mbstring -y
 #apt-get install php-snmp php-xmlrpc php-mysql php-pgsql php-tidy php-redis php-imap php-zip php-bcmath -y
 #apt-get install php-apcu php-geoip php-imagick php-sqlite3 php-ssh2 php-memcached -y
