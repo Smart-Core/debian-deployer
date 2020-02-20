@@ -101,7 +101,7 @@ then
 
     # Varnish
     wget --quiet https://packagecloud.io/varnishcache/varnish5/gpgkey -O - | apt-key add -
-    echo "deb https://packagecloud.io/varnishcache/varnish5/debian/ stretch main\ndeb-src https://packagecloud.io/varnishcache/varnish5/debian/ stretch main" > /etc/apt/sources.list.d/varnishcache5.list
+    printf "deb https://packagecloud.io/varnishcache/varnish5/debian/ stretch main\ndeb-src https://packagecloud.io/varnishcache/varnish5/debian/ stretch main" > /etc/apt/sources.list.d/varnishcache5.list
 
     # PostgreSQL
     wget -q https://www.postgresql.org/media/keys/ACCC4CF8.asc -O - | apt-key add -
@@ -147,7 +147,7 @@ then
 
     # Varnish
 #    wget --quiet https://packagecloud.io/varnishcache/varnish60lts/gpgkey -O - | apt-key add -
-#    echo "deb https://packagecloud.io/varnishcache/varnish60lts/debian/ ${RELEASE} main\ndeb-src https://packagecloud.io/varnishcache/varnish60lts/debian/ ${RELEASE} main" > /etc/apt/sources.list.d/varnishcache5.list
+#    printf "deb https://packagecloud.io/varnishcache/varnish60lts/debian/ ${RELEASE} main\ndeb-src https://packagecloud.io/varnishcache/varnish60lts/debian/ ${RELEASE} main" > /etc/apt/sources.list.d/varnishcache5.list
 
     # PostgreSQL
     wget -q https://www.postgresql.org/media/keys/ACCC4CF8.asc -O - | apt-key add -
@@ -171,10 +171,9 @@ then
 
     # RabbitMQ
     wget -O - "https://packagecloud.io/rabbitmq/rabbitmq-server/gpgkey" | apt-key add -
-    #wget -qO - http://www.rabbitmq.com/rabbitmq-signing-key-public.asc | apt-key add -
     #apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 6B73A36E6026DFCA
     curl -fsSL https://github.com/rabbitmq/signing-keys/releases/download/2.0/rabbitmq-release-signing-key.asc | apt-key add -
-    echo "deb https://dl.bintray.com/rabbitmq-erlang/debian ${RELEASE} erlang-21.x \ndeb https://dl.bintray.com/rabbitmq/debian ${RELEASE} main" > /etc/apt/sources.list.d/rabbitmq.list
+    printf "deb https://dl.bintray.com/rabbitmq-erlang/debian ${RELEASE} erlang\ndeb https://dl.bintray.com/rabbitmq/debian ${RELEASE} main" > /etc/apt/sources.list.d/rabbitmq.list
 
     # Ruby Version Manager
     gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
