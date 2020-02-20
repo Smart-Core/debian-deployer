@@ -37,7 +37,6 @@ INSTALL_APACHE="0"
 #esac
 
 read -p "Install PostrgeSQL (N/y)" INSTALL_POSTRGESQL
-
 case $INSTALL_POSTRGESQL in
     y|Y)echo -e "${GREEN} Enable PostrgeSQL ${NORMAL}"
         INSTALL_POSTRGESQL="1"
@@ -48,7 +47,6 @@ case $INSTALL_POSTRGESQL in
 esac
 
 read -p "Install Ruby (N/y)" INSTALL_RUBY
-
 case INSTALL_RUBY in
     y|Y)echo -e "${GREEN} Enable Ruby ${NORMAL}"
         INSTALL_RUBY="1"
@@ -59,13 +57,22 @@ case INSTALL_RUBY in
 esac
 
 read -p "Install Docker (N/y)" INSTALL_DOCKER
-
 case INSTALL_DOCKER in
     y|Y)echo -e "${GREEN} Enable Docker ${NORMAL}"
         INSTALL_DOCKER="1"
         ;;
     *)  echo -e "${YELLOW} Ignore Docker ${NORMAL}"
         INSTALL_DOCKER="0"
+        ;;
+esac
+
+read -p "Install RabbitMQ (N/y)" INSTALL_RABBITMQ
+case INSTALL_RABBITMQ in
+    y|Y)echo -e "${GREEN} Enable RabbitMQ ${NORMAL}"
+        INSTALL_RABBITMQ="1"
+        ;;
+    *)  echo -e "${YELLOW} Ignore RabbitMQ ${NORMAL}"
+        INSTALL_RABBITMQ="0"
         ;;
 esac
 
@@ -206,7 +213,6 @@ apt-get install colordiff mc htop gcc g++ make git curl rcconf p7zip-full zip dn
 apt-get install acl bash-completion fail2ban resolvconf subversion ntp imagemagick p7zip tree -y
 apt-get install libedit-dev libevent-dev libcurl4-openssl-dev automake1.1 libncurses-dev libpcre3-dev pkg-config python-docutils -y
 apt-get install libodbc1 fcgiwrap libgd-tools snmp mailutils yarn -y
-apt-get install rabbitmq-server -y --fix-missing
 apt-get install nodejs -y
 #apt-get install default-jdk -y
 
@@ -231,6 +237,13 @@ if (( $INSTALL_POSTRGESQL == 1 ))
 then
     apt-get install postgresql postgresql-contrib odbc-postgresql -y
     update-rc.d postgresql defaults
+fi
+
+# RabbitMQ
+if (( $INSTALL_RABBITMQ == 1 ))
+then
+    apt install rabbitmq-server --fix-missing -y
+    update-rc.d rabbitmq-server defaults
 fi
 
 # Docker
