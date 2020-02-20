@@ -49,3 +49,5 @@ alias cdw="cd /var/www"
 if [ -e /usr/share/symfony2-autocomplete/symfony2-autocomplete.bash ]; then
     . /usr/share/symfony2-autocomplete/symfony2-autocomplete.bash
 fi
+
+export GREP_OPTIONS='--color=auto'
