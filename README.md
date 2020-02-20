@@ -5,8 +5,6 @@ Installation
 ------------
 
 ```
-apt-get update
-apt-get install git screen lsb-release -y
 git clone https://github.com/Smart-Core/debian-deployer.git
 cd debian-deployer
 ./install.sh

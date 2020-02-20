@@ -1,6 +1,7 @@
 #!/bin/bash
 
-apt install lsb_release -y
+apt-get update
+apt-get install git screen lsb-release -y
 
 NORMAL='\033[0m'     #  ${NORMAL}
 RED='\033[0;31m'     #  ${RED}
