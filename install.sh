@@ -165,8 +165,8 @@ then
 #    printf "deb http://mirror.mephi.ru/mariadb/repo/10.0/debian jessie main\ndeb-src http://mirror.mephi.ru/mariadb/repo/10.0/debian jessie main" > /etc/apt/sources.list.d/mariadb.list
 
     # MongoDB
-    wget -qO - https://www.mongodb.org/static/pgp/server-4.2.asc | sudo apt-key add -
-    echo "deb http://repo.mongodb.org/apt/debian buster/mongodb-org/4.2 main" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.2.list
+    wget -qO - https://www.mongodb.org/static/pgp/server-4.2.asc | apt-key add -
+    echo "deb http://repo.mongodb.org/apt/debian buster/mongodb-org/4.2 main" | tee /etc/apt/sources.list.d/mongodb-org-4.2.list
 
     # Subversion 1.12
 #    wget -q http://opensource.wandisco.com/wandisco-debian.gpg -O- | apt-key add -
@@ -239,17 +239,12 @@ then
     update-rc.d postgresql defaults
 fi
 
-# RabbitMQ
-if (( $INSTALL_RABBITMQ == 1 ))
-then
-    apt install rabbitmq-server --fix-missing -y
-    update-rc.d rabbitmq-server defaults
-fi
-
 # Docker
 if (( $INSTALL_DOCKER == 1 ))
 then
     apt-get install docker-ce docker-ce-cli containerd.io
+    curl -L "https://github.com/docker/compose/releases/download/1.25.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+    chmod +x /usr/local/bin/docker-compose
 fi
 
 # Apache
@@ -291,6 +286,13 @@ chmod 0777 /var/lib/php/sessions
 
 mkdir /var/log/php
 chmod 0777 /var/log/php
+
+# RabbitMQ
+if (( $INSTALL_RABBITMQ == 1 ))
+then
+    apt install rabbitmq-server php7.3-amqp --fix-missing -y
+    update-rc.d rabbitmq-server defaults
+fi
 
 # Configs
 if [ ! -f ~/.bashrc_old ]
