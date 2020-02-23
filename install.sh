@@ -37,6 +37,7 @@ INSTALL_APACHE="0"
 #esac
 
 read -p "Install PostrgeSQL (N/y)" INSTALL_POSTRGESQL
+
 case $INSTALL_POSTRGESQL in
     y|Y)echo -e "${GREEN} Enable PostrgeSQL ${NORMAL}"
         INSTALL_POSTRGESQL="1"
@@ -46,7 +47,9 @@ case $INSTALL_POSTRGESQL in
         ;;
 esac
 
+
 read -p "Install Ruby (N/y)" INSTALL_RUBY
+
 case INSTALL_RUBY in
     y|Y)echo -e "${GREEN} Enable Ruby ${NORMAL}"
         INSTALL_RUBY="1"
@@ -56,7 +59,9 @@ case INSTALL_RUBY in
         ;;
 esac
 
+
 read -p "Install Docker (N/y)" INSTALL_DOCKER
+
 case INSTALL_DOCKER in
     y|Y)echo -e "${GREEN} Enable Docker ${NORMAL}"
         INSTALL_DOCKER="1"
@@ -66,7 +71,9 @@ case INSTALL_DOCKER in
         ;;
 esac
 
+
 read -p "Install RabbitMQ (N/y)" INSTALL_RABBITMQ
+
 case INSTALL_RABBITMQ in
     y|Y)echo -e "${GREEN} Enable RabbitMQ ${NORMAL}"
         INSTALL_RABBITMQ="1"
@@ -75,6 +82,7 @@ case INSTALL_RABBITMQ in
         INSTALL_RABBITMQ="0"
         ;;
 esac
+
 
 apt-get install apt-utils -y
 apt-get install apt-transport-https dialog dirmngr apt-utils locales locales-all debian-archive-keyring sudo curl software-properties-common wget -y
