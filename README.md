@@ -1,5 +1,5 @@
-Debian 7, 8 and 9 Deployer
-==========================
+Debian 9 and 10 Deployer
+========================
 
 Installation
 ------------
@@ -33,13 +33,11 @@ Default installed soft
 ----------------------
 
 ```
-apache2
-php5.6
-php5.6-fpm
-oracle-java8
-redis-server
+php7.3
+php7.3-fpm
 mariadb-server
-igbinary
+postgresql
+redis-server
 nginx
 nodejs
 postfix
@@ -51,7 +49,6 @@ varnish
 cassandra
 elasticsearch
 mongodb-org
-postgresql
 rabbitmq-server
 ```
 
