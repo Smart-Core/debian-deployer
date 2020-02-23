@@ -358,9 +358,6 @@ else
     apt-get purge apache* -y
 fi
 
-apt-get autoremove -y
-mkdir /var/www
-
 # Ruby
 ## https://www.digitalocean.com/community/tutorials/how-to-install-ruby-on-rails-on-an-debian-7-0-wheezy-vps-using-rvm
 if (( $INSTALL_RUBY == 1 ))
@@ -370,10 +367,14 @@ then
     curl -L https://get.rvm.io | bash -s stable --ruby
     source /etc/profile.d/rvm.sh
     source /usr/local/rvm/scripts/rvm
-    apt-get install -y ruby ruby-dev
+    #apt-get install -y ruby ruby-dev
     gem install capistrano
     gem install capistrano-composer
     gem install capistrano-maintenance
     gem install capistrano-symfony
     gem update
 fi
+
+apt-get clean
+apt-get autoremove -y
+mkdir /var/www
