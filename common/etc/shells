@@ -1,0 +1,9 @@
+# /etc/shells: valid login shells
+/bin/bash
+/bin/sh
+/usr/bin/bash
+/bin/rbash
+/usr/bin/rbash
+/bin/dash
+/usr/bin/dash
+/usr/bin/screen
