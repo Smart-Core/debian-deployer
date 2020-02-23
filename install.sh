@@ -50,7 +50,7 @@ esac
 
 read -p "Install Ruby (N/y)" INSTALL_RUBY
 
-case INSTALL_RUBY in
+case $INSTALL_RUBY in
     y|Y)echo -e "${GREEN} Enable Ruby ${NORMAL}"
         INSTALL_RUBY="1"
         ;;
@@ -62,7 +62,7 @@ esac
 
 read -p "Install Docker (N/y)" INSTALL_DOCKER
 
-case INSTALL_DOCKER in
+case $INSTALL_DOCKER in
     y|Y)echo -e "${GREEN} Enable Docker ${NORMAL}"
         INSTALL_DOCKER="1"
         ;;
@@ -74,7 +74,7 @@ esac
 
 read -p "Install RabbitMQ (N/y)" INSTALL_RABBITMQ
 
-case INSTALL_RABBITMQ in
+case $INSTALL_RABBITMQ in
     y|Y)echo -e "${GREEN} Enable RabbitMQ ${NORMAL}"
         INSTALL_RABBITMQ="1"
         ;;
