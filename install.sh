@@ -342,7 +342,7 @@ if (( $INSTALL_APACHE == 1 ))
 then
     #a2enmod php7.3
     #a2enmod proxy_fcgi setenvif
-    #a2enconf php7.0-fpm
+    #a2enconf php7.4-fpm
 
     /etc/init.d/apache2 restart
 else
