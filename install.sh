@@ -370,7 +370,7 @@ then
     curl -L https://get.rvm.io | bash -s stable --ruby
     source /etc/profile.d/rvm.sh
     source /usr/local/rvm/scripts/rvm
-    apt-get install ruby ruby-dev
+    apt-get install -y ruby ruby-dev
     gem install capistrano
     gem install capistrano-composer
     gem install capistrano-maintenance
