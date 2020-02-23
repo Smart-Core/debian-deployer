@@ -127,11 +127,18 @@ Append the following line:
 /swapfile1 none swap sw 0 0
 ```
 
+User managment
+==============
+
+```
+useradd -m <username>
+passwd <username>
+usermod -a -G www-data <username>
+```
+
 @todo
 -----
 
- *  Debian 9
- *  PHP 7.2
  *  Backup resolf.conf default config
  *  Install latest phpmyadmin via http://www.phpmyadmin.net/home_page/version.json
  *  IonCube Loader (https://www.digitalocean.com/community/tutorials/how-to-install-ioncube-loader)
