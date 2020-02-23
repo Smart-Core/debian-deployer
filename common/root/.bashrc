@@ -40,10 +40,8 @@ alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
 alias df='df -h'
-alias du='du -sh'
+alias du='du -h -d1'
 alias free='free -h'
-alias s2="php app/console"
-alias sf="php app/console"
 alias cdw="cd /var/www"
 
 if [ -e /usr/share/symfony2-autocomplete/symfony2-autocomplete.bash ]; then
