@@ -139,6 +139,7 @@ usermod -a -G www-data <username>
 @todo
 -----
 
+ *  Nginx/php-fpm umask setting (https://stackoverflow.com/questions/11584021/nginx-php-fpm-umask-setting)
  *  Backup resolf.conf default config
  *  Install latest phpmyadmin via http://www.phpmyadmin.net/home_page/version.json
  *  IonCube Loader (https://www.digitalocean.com/community/tutorials/how-to-install-ioncube-loader)
