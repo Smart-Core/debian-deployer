@@ -136,6 +136,35 @@ passwd <username>
 usermod -a -G www-data <username>
 ```
 
+PHP-FPM Pools per Site
+======================
+
+https://gist.github.com/fyrebase/62262b1ff33a6aaf5a54
+
+1. Copy `/etc/php/7.3/fpm/pool.d/www.conf` to `/etc/php/7.3/fpm/pool.d/my_site.conf`
+2. Pool name. It is on the top [www]. Rename it to [mysite]
+3. Next, change the user and group field and put the username and group to run it with.
+```
+user = mysite_user
+group = mysite_user
+```
+4. Change the socket file name. Every pool should have its own separate socket. And the particular site should use this particular socket file to connect to fpm.
+```
+listen = /run/php/php7.3-fpm-mysite.sock
+```
+5. Now restart php-fpm
+```
+/etc/init.d/php7.3-fpm restart
+```
+6. Configure Nginx
+```
+fastcgi_pass unix:/var/run/php/php7.3-fpm-mysql.sock;
+```
+7. Now reload nginx
+```
+/etc/init.d/nginx reload
+```
+
 @todo
 -----
 
