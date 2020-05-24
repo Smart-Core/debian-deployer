@@ -9,18 +9,18 @@ RELEASE=$(lsb_release -cs)
 
 tput sgr0
 
-#read -p "Select PHP version (71/73), default is 73:" PHP_VERSION
+#read -p "Select PHP version (73/74), default is 74:" PHP_VERSION
 
-PHP_VERSION="73"
+PHP_VERSION="74"
 
 #case $PHP_VERSION in
-#    71) echo -e "${GREEN} Enable PHP v7.1 ${NORMAL}"
-#        ;;
 #    73) echo -e "${GREEN} Enable PHP v7.3 ${NORMAL}"
 #        ;;
+#    74) echo -e "${GREEN} Enable PHP v7.4 ${NORMAL}"
+#        ;;
 #    *)
-#        echo -e "${YELLOW} Wrong PHP version selected, using v 7.3 by default${NORMAL}"
-#        PHP_VERSION="73"
+#        echo -e "${YELLOW} Wrong PHP version selected, using v 7.4 by default${NORMAL}"
+#        PHP_VERSION="74"
 #        ;;
 #esac
 
@@ -212,7 +212,7 @@ fi
 
 # NodeJS
 #  in this step apt-get update will executes automatically
-wget -qO- https://deb.nodesource.com/setup_13.x | bash -
+wget -qO- https://deb.nodesource.com/setup_14.x | bash -
 
 # Базовый софт
 apt-get install net-tools gnupg gnupg2 ca-certificates -y
@@ -269,29 +269,46 @@ apt-get install nginx memcached mcrypt uw-mailutils -y
 chmod 0777 /var/log/nginx
 
 # PHP 7.3
-apt install -y php7.3 php7.3-fpm php7.3-cli php7.3-dev php7.3-common php7.3-apcu php7.3-mysql php7.3-pgsql php7.3-sqlite3
-apt install -y php7.3-gmp php7.3-gd php7.3-bcmath php7.3-curl php7.3-intl php7.3-mbstring php7.3-bz2 php7.3-xml php7.3-zip
-apt install -y php7.3-snmp php7.3-xmlrpc php7.3-tidy php7.3-redis php7.3-imap php7.3-geoip php7.3-imagick php7.3-ssh2 php7.3-memcached
+if (( $PHP_VERSION == 73 ))
+then
+    apt install -y php7.3 php7.3-fpm php7.3-cli php7.3-dev php7.3-common php7.3-apcu php7.3-mysql php7.3-pgsql php7.3-sqlite3
+    apt install -y php7.3-gmp php7.3-gd php7.3-bcmath php7.3-curl php7.3-intl php7.3-mbstring php7.3-bz2 php7.3-xml php7.3-zip
+    apt install -y php7.3-snmp php7.3-xmlrpc php7.3-tidy php7.3-redis php7.3-imap php7.3-geoip php7.3-imagick php7.3-ssh2 php7.3-memcached
+
+    ln -s /etc/php/7.3/global.ini /etc/php/7.3/apache2/conf.d/00-global.ini
+    ln -s /etc/php/7.3/global.ini /etc/php/7.3/cli/conf.d/00-global.ini
+    ln -s /etc/php/7.3/global.ini /etc/php/7.3/fpm/conf.d/00-global.ini
+
+    ln -s /etc/php/7.3/php-apache.ini /etc/php/7.3/apache2/conf.d/01-php-apache.ini
+    ln -s /etc/php/7.3/php-cli.ini /etc/php/7.3/cli/conf.d/01-php-cli.ini
+    ln -s /etc/php/7.3/php-fpm.ini /etc/php/7.3/fpm/conf.d/01-php-fpm.ini
+
+    /etc/init.d/php7.3-fpm restart
+    update-rc.d php7.3-fpm defaults
+fi
 
 # PHP 7.4
-#apt install -y php7.4 php7.4-fpm php7.4-cli php7.4-dev php7.4-common php7.4-apcu php7.4-mysql php7.4-pgsql php7.4-sqlite3
-#apt install -y php7.4-gmp php7.4-gd php7.4-bcmath php7.4-curl php7.4-intl php7.4-mbstring php7.4-bz2 php7.4-xml php7.4-zip
-#apt install -y php7.4-snmp php7.4-xmlrpc php7.4-tidy php7.4-redis php7.4-imap php7.4-geoip php7.4-imagick php7.4-ssh2 php7.4-memcached
+if (( $PHP_VERSION == 74 ))
+then
+    apt install -y php7.4 php7.4-fpm php7.4-cli php7.4-dev php7.4-common php7.4-apcu php7.4-mysql php7.4-pgsql php7.4-sqlite3
+    apt install -y php7.4-gmp php7.4-gd php7.4-bcmath php7.4-curl php7.4-intl php7.4-mbstring php7.4-bz2 php7.4-xml php7.4-zip
+    apt install -y php7.4-snmp php7.4-xmlrpc php7.4-tidy php7.4-redis php7.4-imap php7.4-geoip php7.4-imagick php7.4-ssh2 php7.4-memcached
+
+    ln -s /etc/php/7.4/global.ini /etc/php/7.4/apache2/conf.d/00-global.ini
+    ln -s /etc/php/7.4/global.ini /etc/php/7.4/cli/conf.d/00-global.ini
+    ln -s /etc/php/7.4/global.ini /etc/php/7.4/fpm/conf.d/00-global.ini
+
+    ln -s /etc/php/7.4/php-apache.ini /etc/php/7.4/apache2/conf.d/01-php-apache.ini
+    ln -s /etc/php/7.4/php-cli.ini /etc/php/7.4/cli/conf.d/01-php-cli.ini
+    ln -s /etc/php/7.4/php-fpm.ini /etc/php/7.4/fpm/conf.d/01-php-fpm.ini
+
+    /etc/init.d/php7.4-fpm restart
+    update-rc.d php7.4-fpm defaults
+fi
 
 #apt-get install php php-cli php-dev php-fpm php-pear php-gd php-intl php-curl php-gmp php-bz2 php-mbstring -y
 #apt-get install php-snmp php-xmlrpc php-mysql php-pgsql php-tidy php-redis php-imap php-zip php-bcmath -y
 #apt-get install php-apcu php-geoip php-imagick php-sqlite3 php-ssh2 php-memcached -y
-
-ln -s /etc/php/7.3/global.ini /etc/php/7.3/apache2/conf.d/00-global.ini
-ln -s /etc/php/7.3/global.ini /etc/php/7.3/cli/conf.d/00-global.ini
-ln -s /etc/php/7.3/global.ini /etc/php/7.3/fpm/conf.d/00-global.ini
-
-ln -s /etc/php/7.3/php-apache.ini /etc/php/7.3/apache2/conf.d/01-php-apache.ini
-ln -s /etc/php/7.3/php-cli.ini /etc/php/7.3/cli/conf.d/01-php-cli.ini
-ln -s /etc/php/7.3/php-fpm.ini /etc/php/7.3/fpm/conf.d/01-php-fpm.ini
-
-/etc/init.d/php7.3-fpm restart
-update-rc.d php7.3-fpm defaults
 
 mkdir /var/lib/php
 mkdir /var/lib/php/sessions
@@ -303,7 +320,7 @@ chmod 0777 /var/log/php
 # RabbitMQ
 if (( $INSTALL_RABBITMQ == 1 ))
 then
-    apt install rabbitmq-server php7.3-amqp --fix-missing -y
+    apt install rabbitmq-server php7.4-amqp --fix-missing -y
     update-rc.d rabbitmq-server defaults
 fi
 
