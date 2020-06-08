@@ -27,6 +27,17 @@ server {
     error_log /var/log/nginx/'.$dir.'_errors.log;
     access_log /var/log/nginx/'.$dir.'_access.log;
 
+    location = /favicon.ico {
+        log_not_found off;
+        access_log off;
+    }
+    
+    location = /robots.txt {
+        allow all;
+        log_not_found off;
+        access_log off;
+    }
+    
     # Deny all . files
     location ~ /\.(ht|git) {
         deny all;
