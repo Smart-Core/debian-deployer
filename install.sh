@@ -232,6 +232,7 @@ apt-get install redis-server -y
 
 # @todo интерактивный выбор mysql
 # https://andreyex.ru/operacionnaya-sistema-debian/kak-ustanovit-mariadb-na-debian-10/
+# https://devanswers.co/phpmyadmin-access-denied-for-user-root-localhost/
 apt-get install mariadb-server -y
 mysql_secure_installation
 
