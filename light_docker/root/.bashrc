@@ -44,6 +44,10 @@ alias du='du -h -d1'
 alias free='free -h'
 alias cdw="cd /var/www"
 
+# Use bash-completion, if available
+[[ $PS1 && -f /usr/share/bash-completion/bash_completion ]] && \
+    . /usr/share/bash-completion/bash_completion
+
 #if [ -e /usr/share/symfony2-autocomplete/symfony2-autocomplete.bash ]; then
 #    . /usr/share/symfony2-autocomplete/symfony2-autocomplete.bash
 #fi

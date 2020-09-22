@@ -66,7 +66,6 @@ if [ ! -f ~/.bashrc_old ]
 then
     mv ~/.bashrc ~/.bashrc_old
     cp -R light_docker/etc / -v
-    cp -R light_docker/usr / -v
     cp -R light_docker/root / -v
 fi
 

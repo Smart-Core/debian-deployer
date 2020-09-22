@@ -127,6 +127,17 @@ Append the following line:
 /swapfile1 none swap sw 0 0
 ```
 
+Quick install swap 512Mb:
+
+```
+dd if=/dev/zero of=/swapfile1 bs=1024 count=524288
+chown root:root /swapfile1
+chmod 0600 /swapfile1
+mkswap /swapfile1
+swapon /swapfile1
+echo "/swapfile1 none swap sw 0 0" >> /etc/fstab
+```
+
 User managment
 ==============
 
