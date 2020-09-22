@@ -1,14 +1,15 @@
 #!/bin/bash
 
+# Указать версии компонентов докера
 DOCKER_COMPOSE=1.27.3
 DOCKER_CE=docker-ce_19.03.12~3-0~debian-buster_amd64.deb
 DOCKER_CE_CLI=docker-ce-cli_19.03.12~3-0~debian-buster_amd64.deb
 CONTAINERD_IO=containerd.io_1.2.13-2_amd64.deb
 
-NORMAL='\033[0m'     #  ${NORMAL}
-RED='\033[0;31m'     #  ${RED}
-GREEN='\033[0;32m'   #  ${GREEN}
-YELLOW='\033[0;33m'  #  ${YELLOW}
+NORMAL='\033[0m'
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
 DEBIAN_VERSION=$(cat /etc/debian_version | head -c 1)
 RELEASE=$(lsb_release -cs)
 
@@ -39,7 +40,7 @@ dpkg-reconfigure tzdata
 apt-get update
 
 apt-get install net-tools gnupg gnupg2 ca-certificates -y
-apt-get install acl colordiff curl fail2ban htop make mc mlocate sudo supervisor tmux zip -y
+apt-get install acl certbot colordiff curl fail2ban htop make mc mlocate sudo supervisor tmux zip -y
 apt-get install nginx -y
 
 # https://debian.pkgs.org/10/debian-main-amd64/mlocate_0.26-3_amd64.deb.html
@@ -59,6 +60,15 @@ rm -rf ${DOCKER_CE}
 
 curl -L "https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 chmod +x /usr/local/bin/docker-compose
+
+# Configs
+if [ ! -f ~/.bashrc_old ]
+then
+    mv ~/.bashrc ~/.bashrc_old
+    cp -R light_docker/etc / -v
+    cp -R light_docker/usr / -v
+    cp -R light_docker/root / -v
+fi
 
 apt-get clean
 apt-get autoremove -y
