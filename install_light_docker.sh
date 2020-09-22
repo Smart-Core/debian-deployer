@@ -33,10 +33,10 @@ else
     exit
 fi
 
-apt-get update
-
 dpkg-reconfigure locales
 dpkg-reconfigure tzdata
+
+apt-get update
 
 apt-get install net-tools gnupg gnupg2 ca-certificates -y
 apt-get install acl colordiff curl fail2ban htop make mc mlocate sudo tmux zip -y
