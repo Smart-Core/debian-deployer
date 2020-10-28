@@ -148,6 +148,13 @@ usermod -aG www-data <username>
 usermod -aG docker <username>
 ```
 
+Простой скрипт для оценки производительности VPS
+================================================
+
+```
+bash <(wget --no-check-certificate -O - https://raw.github.com/mgutz/vpsbench/master/
+```
+
 PHP-FPM Pools per Site
 ======================
 

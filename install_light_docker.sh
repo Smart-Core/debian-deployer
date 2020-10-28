@@ -40,7 +40,7 @@ dpkg-reconfigure tzdata
 apt-get update
 
 apt-get install net-tools gnupg gnupg2 ca-certificates -y
-apt-get install acl bash-completion certbot colordiff curl fail2ban htop make mc mlocate sudo supervisor tmux zip -y
+apt-get install acl bash-completion certbot colordiff curl fail2ban htop make mc mlocate sudo supervisor time tmux zip -y
 apt-get install nginx -y
 
 # https://debian.pkgs.org/10/debian-main-amd64/mlocate_0.26-3_amd64.deb.html

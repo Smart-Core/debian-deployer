@@ -218,7 +218,7 @@ wget -qO- https://deb.nodesource.com/setup_14.x | bash -
 apt-get install net-tools gnupg gnupg2 ca-certificates -y
 #apt-get install libmyodbc python-software-properties monit -y
 apt-get install colordiff mc htop gcc g++ make git curl rcconf p7zip-full zip dnsutils -y
-apt-get install acl bash-completion fail2ban resolvconf subversion ntp imagemagick p7zip tree -y
+apt-get install acl bash-completion fail2ban resolvconf subversion ntp imagemagick p7zip time tree -y
 apt-get install libedit-dev libevent-dev libcurl4-openssl-dev automake1.1 libncurses-dev libpcre3-dev pkg-config python-docutils -y
 apt-get install libodbc1 fcgiwrap libgd-tools snmp mailutils yarn -y
 apt-get install nodejs -y

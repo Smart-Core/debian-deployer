@@ -10,7 +10,7 @@ RELEASE=$(lsb_release -cs)
 tput sgr0
 
 apt-get install apt-utils -y
-apt-get install apt-transport-https dialog dirmngr apt-utils locales locales-all debian-archive-keyring sudo curl software-properties-common wget -y
+apt-get install apt-transport-https dialog dirmngr apt-utils locales locales-all debian-archive-keyring sudo curl software-properties-common time wget -y
 
 dpkg-reconfigure locales
 dpkg-reconfigure tzdata
