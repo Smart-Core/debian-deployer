@@ -144,7 +144,8 @@ User managment
 ```
 useradd -m <username>
 passwd <username>
-usermod -a -G www-data <username>
+usermod -aG www-data <username>
+usermod -aG docker <username>
 ```
 
 PHP-FPM Pools per Site
