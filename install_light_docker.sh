@@ -46,8 +46,12 @@ else
     exit
 fi
 
-update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8 LANGUAGE=en_US.UTF-8
-dpkg-reconfigure locales
+# /etc/locale.gen
+sed -i s/'# ru_RU.UTF-8 UTF-8'/'ru_RU.UTF-8 UTF-8'/g /etc/locale.gen
+locale-gen ru_RU.UTF-8
+localectl set-locale LANG=ru_RU.UTF-8
+update-locale LANG=ru_RU.UTF-8
+#dpkg-reconfigure locales
 dpkg-reconfigure tzdata
 
 apt-get update
