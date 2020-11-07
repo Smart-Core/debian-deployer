@@ -15,7 +15,7 @@ RELEASE=$(lsb_release -cs)
 
 tput sgr0
 
-apt-get install wget curl software-properties-common dirmngr apt-transport-https lsb-release ca-certificates -y
+apt install wget curl software-properties-common dirmngr apt-transport-https lsb-release ca-certificates -y
 
 if (( $DEBIAN_VERSION == 9 ))
 then
@@ -46,7 +46,6 @@ else
     exit
 fi
 
-# /etc/locale.gen
 sed -i s/'# ru_RU.UTF-8 UTF-8'/'ru_RU.UTF-8 UTF-8'/g /etc/locale.gen
 locale-gen ru_RU.UTF-8
 localectl set-locale LANG=ru_RU.UTF-8
@@ -54,12 +53,11 @@ update-locale LANG=ru_RU.UTF-8
 #dpkg-reconfigure locales
 dpkg-reconfigure tzdata
 
-apt-get update
+apt update
 
-apt-get install net-tools gnupg gnupg2 ca-certificates -y
-apt-get install acl bash-completion certbot colordiff curl fail2ban htop make mc mlocate sudo supervisor time tmux zip -y
-apt-get install nginx -y
-apt-get install docker-ce docker-ce-cli containerd -y
+apt install acl bash-completion certbot colordiff fail2ban net-tools gnupg gnupg2 htop make mc mlocate sudo supervisor time tmux zip -y
+apt install nginx -y
+apt install docker-ce docker-ce-cli containerd.io -y
 
 # https://debian.pkgs.org/10/debian-main-amd64/mlocate_0.26-3_amd64.deb.html
 # https://download.docker.com/linux/debian/dists/buster/pool/stable/amd64/
@@ -87,6 +85,6 @@ then
     cp -R light_docker/root / -v
 fi
 
-apt-get clean
-apt-get autoremove -y
+apt clean
+apt autoremove -y
 mkdir /var/www
