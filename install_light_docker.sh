@@ -1,5 +1,8 @@
 #!/bin/bash
 
+SCRIPT_START_SECONDS=$(date +%s)
+SCRIPT_START_DATE=$(date +%T)
+
 # Указать версии компонентов докера
 DOCKER_COMPOSE=1.27.4
 #DOCKER_CE=docker-ce_19.03.12~3-0~debian-buster_amd64.deb
@@ -88,3 +91,9 @@ fi
 apt clean
 apt autoremove -y
 mkdir /var/www
+
+SCRIPT_END_DATE=$(date +%T)
+
+echo "Install started  at: ${SCRIPT_START_DATE}"
+echo "Install finished at: ${SCRIPT_END_DATE}"
+echo "Total time elapsed: $(date -ud "@$(($(date +%s) - $SCRIPT_START_SECONDS))" +%T)"
