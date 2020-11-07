@@ -15,7 +15,7 @@ RELEASE=$(lsb_release -cs)
 
 tput sgr0
 
-apt-get install wget -y
+apt-get install wget curl add-apt-repository -y
 
 if (( $DEBIAN_VERSION == 9 ))
 then
