@@ -15,7 +15,7 @@ RELEASE=$(lsb_release -cs)
 
 tput sgr0
 
-apt-get install wget curl add-apt-repository -y
+apt-get install wget curl software-properties-common dirmngr apt-transport-https lsb-release ca-certificates -y
 
 if (( $DEBIAN_VERSION == 9 ))
 then
