@@ -152,7 +152,7 @@ usermod -aG docker <username>
 ================================================
 
 ```
-bash <(wget --no-check-certificate -O - https://raw.github.com/mgutz/vpsbench/master/
+bash <(wget --no-check-certificate -O - https://raw.github.com/mgutz/vpsbench/master/)
 ```
 
 PHP-FPM Pools per Site
