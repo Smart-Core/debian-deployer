@@ -92,6 +92,8 @@ apt clean
 apt autoremove -y
 mkdir /var/www
 
+ssh-keygen -A
+
 SCRIPT_END_DATE=$(date +%T)
 
 echo "Install started  at: ${SCRIPT_START_DATE}"
