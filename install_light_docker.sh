@@ -58,7 +58,7 @@ dpkg-reconfigure tzdata
 
 apt update
 
-apt install acl bash-completion certbot colordiff fail2ban net-tools gnupg gnupg2 htop make mailutils mc mlocate sudo supervisor time tmux zip -y
+apt install acl bash-completion certbot python-certbot-nginx colordiff fail2ban net-tools gnupg gnupg2 htop make mailutils mc mlocate sudo supervisor time tmux zip -y
 apt install nginx -y
 apt install docker-ce docker-ce-cli containerd.io -y
 
