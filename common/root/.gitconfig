@@ -1,11 +1,17 @@
 [alias]
     lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
     st = status
+[core]
+    excludesfile = ~/.gitignore
+[user]
+    email = you@example.com
+    name = art
 [color]
     diff = always
     status = always
     branch = always
     interactive = always
+    ui = auto
 [color "branch"]
     current = yellow reverse
     local = yellow
