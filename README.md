@@ -187,14 +187,15 @@ fastcgi_pass unix:/var/run/php/php7.3-fpm-mysql.sock;
 @todo
 -----
 
- *  Nginx/php-fpm umask setting (https://stackoverflow.com/questions/11584021/nginx-php-fpm-umask-setting)
- *  Backup resolf.conf default config
- *  Install latest phpmyadmin via http://www.phpmyadmin.net/home_page/version.json
- *  IonCube Loader (https://www.digitalocean.com/community/tutorials/how-to-install-ioncube-loader)
- *  Install via tar archive
- *  HTTPS
- *  PECL uploadprogress и/или apc.rfc1867 = 1
- *  http://www.shellhacks.com/ru/Ustanovka-i-Nastroyka-Fail2ban-v-CentOS-Ubuntu
- *  apache-autoconf.conf (https://github.com/helios-ag/symfony-website-config)
- *  MUnin (http://habrahabr.ru/post/30494/)
- *  https://developers.google.com/speed/pagespeed/module
+ * Nginx/php-fpm umask setting (https://stackoverflow.com/questions/11584021/nginx-php-fpm-umask-setting)
+ * Backup resolf.conf default config
+ * Install latest phpmyadmin via http://www.phpmyadmin.net/home_page/version.json
+ * IonCube Loader (https://www.digitalocean.com/community/tutorials/how-to-install-ioncube-loader)
+ * Install via tar archive
+ * HTTPS
+ * PECL uploadprogress и/или apc.rfc1867 = 1
+ * http://www.shellhacks.com/ru/Ustanovka-i-Nastroyka-Fail2ban-v-CentOS-Ubuntu
+ * apache-autoconf.conf (https://github.com/helios-ag/symfony-website-config)
+ * MUnin (http://habrahabr.ru/post/30494/)
+ * https://developers.google.com/speed/pagespeed/module
+ * https://eavictor.wordpress.com/2017/05/31/install-scout-realtime-auto-start/
