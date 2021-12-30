@@ -18,6 +18,7 @@ RELEASE=$(lsb_release -cs)
 tput sgr0
 
 apt install wget curl software-properties-common dirmngr apt-transport-https lsb-release ca-certificates -y
+apt install localehelper -y
 
 # Docker
 curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -
