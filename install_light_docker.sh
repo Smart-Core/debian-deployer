@@ -40,7 +40,7 @@ update-locale LANG=ru_RU.UTF-8
 dpkg-reconfigure tzdata
 
 apt update
-apt upgrade
+apt upgrade -y
 
 # python-certbot-nginx
 apt install acl bash-completion certbot colordiff fail2ban net-tools gnupg gnupg2 htop make mailutils mc mlocate sudo supervisor time tmux zip -y
