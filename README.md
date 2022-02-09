@@ -142,8 +142,11 @@ User managment
 ==============
 
 ```
-useradd -m <username>
+useradd -m -G www-data,docker -s /bin/bash <username>
 passwd <username>
+```
+
+```
 usermod -aG www-data <username>
 usermod -aG docker <username>
 ```
