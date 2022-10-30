@@ -4,7 +4,7 @@ SCRIPT_START_SECONDS=$(date +%s)
 SCRIPT_START_DATE=$(date +%T)
 
 # Указать версии компонентов докера
-DOCKER_COMPOSE=2.2.2
+DOCKER_COMPOSE=2.12.2
 #DOCKER_CE=docker-ce_19.03.12~3-0~debian-buster_amd64.deb
 #DOCKER_CE_CLI=docker-ce-cli_19.03.12~3-0~debian-buster_amd64.deb
 #CONTAINERD_IO=containerd.io_1.2.13-2_amd64.deb

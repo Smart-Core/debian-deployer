@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DOCKER_COMPOSE=2.1.1
+DOCKER_COMPOSE=2.12.2
 
 NORMAL='\033[0m'     #  ${NORMAL}
 RED='\033[0;31m'     #  ${RED}
