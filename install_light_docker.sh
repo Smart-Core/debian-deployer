@@ -29,8 +29,8 @@ wget --quiet -O - http://nginx.org/keys/nginx_signing.key | apt-key add -
 printf "deb http://nginx.org/packages/mainline/debian/ ${RELEASE} nginx\ndeb-src http://nginx.org/packages/mainline/debian/ ${RELEASE} nginx" > /etc/apt/sources.list.d/nginx.list
 
 # Ondrej Sury php
-wget --quiet -O - https://packages.sury.org/php/apt.gpg | apt-key add -
-printf "deb https://packages.sury.org/php/ ${RELEASE} main" > /etc/apt/sources.list.d/php-sury.list
+# wget --quiet -O - https://packages.sury.org/php/apt.gpg | apt-key add -
+# printf "deb https://packages.sury.org/php/ ${RELEASE} main" > /etc/apt/sources.list.d/php-sury.list
 
 sed -i s/'# ru_RU.UTF-8 UTF-8'/'ru_RU.UTF-8 UTF-8'/g /etc/locale.gen
 locale-gen ru_RU.UTF-8
@@ -65,8 +65,8 @@ apt install docker-ce docker-ce-cli containerd.io -y
 # curl -L "https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 # chmod +x /usr/local/bin/docker-compose
 
-sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-Linux-x86_64" -o /usr/local/bin/docker-compose
-sudo chmod +x /usr/local/bin/docker-compose
+# sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-Linux-x86_64" -o /usr/local/bin/docker-compose
+# sudo chmod +x /usr/local/bin/docker-compose
 
 # Configs
 if [ ! -f ~/.bashrc_old ]
