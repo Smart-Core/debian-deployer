@@ -13,7 +13,7 @@ tput sgr0
 
 apt install localehelper wget curl dirmngr apt-transport-https lsb-release ca-certificates -y
 
-if (( $RELEASE == 'trixie' ))
+if (( $RELEASE == trixie ))
 then
     # Add Docker's official GPG key:
     install -m 0755 -d /etc/apt/keyrings
